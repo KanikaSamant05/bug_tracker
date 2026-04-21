@@ -34,7 +34,7 @@ function MembersModal({ projectId, assignee, onClose }) {
     if (!projectId) { setLoadingM(false); return; }
     const load = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/projects/${projectId}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/projects/${projectId}`, {
           headers: { authorization: token },
         });
         if (!res.ok) throw new Error();
@@ -166,7 +166,7 @@ function InviteModal({ projectId, onClose }) {
     setError("");
     setSuccess("");
     try {
-      const res = await fetch(`http://localhost:5000/projects/${projectId}/invite`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/projects/${projectId}/invite`, {
         method: "POST",
         headers: { "Content-Type": "application/json", authorization: token },
         body: JSON.stringify({ email }),
@@ -265,7 +265,7 @@ function TicketModal({ ticketId, onClose, onUpdate }) {
     const fetchTicket = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:5000/tickets/${ticketId}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/tickets/${ticketId}`, {
           headers: { authorization: token },
         });
         if (!res.ok) throw new Error("Failed to fetch ticket");
@@ -288,7 +288,7 @@ function TicketModal({ ticketId, onClose, onUpdate }) {
 
   const handleFieldChange = async (field, value) => {
     try {
-      const res = await fetch(`http://localhost:5000/tickets/${ticketId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/tickets/${ticketId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", authorization: token },
         body: JSON.stringify({ [field]: value }),
@@ -305,7 +305,7 @@ function TicketModal({ ticketId, onClose, onUpdate }) {
     if (!comment.trim()) return;
     setPosting(true);
     try {
-      const res = await fetch(`http://localhost:5000/tickets/${ticketId}/comments`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/tickets/${ticketId}/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json", authorization: token },
         body: JSON.stringify({ text: comment }),
@@ -322,7 +322,7 @@ function TicketModal({ ticketId, onClose, onUpdate }) {
 
   const handleDeleteComment = async (commentId) => {
     try {
-      const res = await fetch(`http://localhost:5000/tickets/${ticketId}/comments/${commentId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/tickets/${ticketId}/comments/${commentId}`, {
         method: "DELETE",
         headers: { authorization: token },
       });

@@ -16,7 +16,7 @@ function Signup({ onLogin }) {
 
     try {
       // step 1 — signup
-      const res = await fetch("http://localhost:5000/signup", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password })
@@ -26,7 +26,7 @@ function Signup({ onLogin }) {
 
       if (res.ok && data._id) {
         // step 2 — auto login
-        const loginRes = await fetch("http://localhost:5000/login", {
+        const loginRes = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password })
@@ -35,8 +35,8 @@ function Signup({ onLogin }) {
 
         if (loginData.token) {
           localStorage.setItem("token", loginData.token);
-          onLogin();             // ✅ updates App token state
-          navigate("/projects"); // ✅ go to projects
+          onLogin();             
+          navigate("/projects"); 
         }
       } else {
         setError(data.message || data.error || "Signup failed");

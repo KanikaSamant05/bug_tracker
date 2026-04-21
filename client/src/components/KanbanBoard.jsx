@@ -52,7 +52,7 @@ function KanbanBoard({ tickets, setTickets, projectMembers = [], projectId }) {
     setTickets(tickets.map(t =>
       t._id === ticketId ? { ...t, status: newStatus } : t
     ));
-    await fetch(`http://localhost:5000/tickets/${ticketId}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/tickets/${ticketId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({ status: newStatus })
@@ -60,7 +60,7 @@ function KanbanBoard({ tickets, setTickets, projectMembers = [], projectId }) {
   };
 
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:5000/tickets/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/tickets/${id}`, {
       method: "DELETE",
       headers: { Authorization: token }
     });

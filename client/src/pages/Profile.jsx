@@ -14,8 +14,8 @@ function Profile({ onLogout }) {
     const fetchData = async () => {
       try {
         const [userRes, ticketsRes] = await Promise.all([
-          fetch("http://localhost:5000/me", { headers: { authorization: token } }),
-          fetch("http://localhost:5000/tickets/assigned", { headers: { authorization: token } }),
+          fetch(`${import.meta.env.VITE_API_URL}/me`, { headers: { authorization: token } }),
+          fetch(`${import.meta.env.VITE_API_URL}/tickets/assigned`, { headers: { authorization: token } }),
         ]);
         const userData = await userRes.json();
         const ticketsData = await ticketsRes.json();

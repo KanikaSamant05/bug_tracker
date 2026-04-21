@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 
-function Home({ onLogout }) {           // ✅ FIX: accept onLogout prop
+function Home({ onLogout }) {           
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    onLogout();         // ✅ clears token + triggers App re-render
-    navigate("/");      // then redirect home
+    onLogout();        
+
+    navigate("/");      
   };
 
   return (
@@ -40,7 +41,7 @@ function Home({ onLogout }) {           // ✅ FIX: accept onLogout prop
       {token ? (
         <div className="flex gap-4">
           <button
-            onClick={() => navigate("/projects")}  // ✅ FIX: was /app, should be /projects
+            onClick={() => navigate("/projects")}  
             className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors cursor-pointer"
           >
             Go to Projects →

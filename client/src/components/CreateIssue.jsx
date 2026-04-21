@@ -39,7 +39,7 @@ const handleSubmit = async (e) => {
   let res;
 
   if (existingTicket) {
-    res = await fetch(`http://localhost:5000/tickets/${existingTicket._id}`, {
+    res = await fetch(`${import.meta.env.VITE_API_URL}/tickets/${existingTicket._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({
@@ -48,7 +48,7 @@ const handleSubmit = async (e) => {
       })
     });
   } else {
-    res = await fetch("http://localhost:5000/tickets", {
+    res = await fetch(`${import.meta.env.VITE_API_URL}/tickets`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({
@@ -74,7 +74,7 @@ const handleSubmit = async (e) => {
     setInviting(true);
     setInviteMsg("");
     try {
-      const res = await fetch(`http://localhost:5000/projects/${projectId}/invite`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/projects/${projectId}/invite`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

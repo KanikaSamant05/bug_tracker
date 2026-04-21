@@ -24,14 +24,14 @@ function BoardPage() {
   useEffect(() => {
     if (!token) return;
 
-    fetch(`http://localhost:5000/projects/${projectId}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/projects/${projectId}`, {
       headers: { authorization: token }
     })
       .then(res => res.json())
       .then(data => setProject(data))
       .catch(() => {});
 
-    fetch(`http://localhost:5000/tickets?projectId=${projectId}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/tickets?projectId=${projectId}`, {
       headers: { authorization: token }
     })
       .then(res => res.json())

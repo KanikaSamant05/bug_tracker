@@ -22,7 +22,7 @@ function Projects({ onLogout }) {
       return;
     }
 
-    fetch("http://localhost:5000/me", {
+    fetch(`${import.meta.env.VITE_API_URL}/me`, {
       headers: { authorization: token }
     })
       .then(res => res.json())
@@ -44,7 +44,7 @@ function Projects({ onLogout }) {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch("http://localhost:5000/projects", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/projects`, {
         headers: { authorization: token }
       });
       const data = await res.json();
@@ -61,7 +61,7 @@ function Projects({ onLogout }) {
     if (!name.trim()) return;
     setCreating(true);
     try {
-      const res = await fetch("http://localhost:5000/projects", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/projects`, {
         method: "POST",
         headers: { "Content-Type": "application/json", authorization: token },
         body: JSON.stringify({ name, description })
@@ -81,7 +81,7 @@ function Projects({ onLogout }) {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this project? All tickets will be deleted too.")) return;
     try {
-      await fetch(`http://localhost:5000/projects/${id}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/projects/${id}`, {
         method: "DELETE",
         headers: { authorization: token }
       });
@@ -246,7 +246,7 @@ function Projects({ onLogout }) {
                     className="text-gray-300 hover:text-red-400 transition-colors p-0.5 rounded cursor-pointer"
                     title="Delete project"
                   >
-                    {/* ✅ SVG Trash Icon */}
+                  
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"

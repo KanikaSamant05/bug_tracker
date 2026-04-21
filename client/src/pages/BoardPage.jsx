@@ -5,7 +5,7 @@ import KanbanBoard from "../components/KanbanBoard";
 import CreateIssue from "../components/CreateIssue";
 import TicketModal from "../components/TicketModal";
 
-const socket = io("http://localhost:5000");
+const socket = io(import.meta.env.VITE_API_URL);
 
 function BoardPage() {
   const { projectId } = useParams();
